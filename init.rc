@@ -1,0 +1,34 @@
+on fs
+    mount_all /fstab.unknown
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+
+#    setprop ro.kernel.qemu 1
+
+    setprop ro.hardware.gralloc drm
+    setprop ro.hardware.hwcomposer drm
+    setprop debug.sf.no_hw_vsync 1
+    setprop hwc.drm.use_framebuffer_target 1
+    setprop hwc.drm.use_overlay_planes 0
+
+#    setprop debug.sf.nobootanimation 1
+#    setprop debug.egl.callstack 1
+#    setprop debug.egl.trace 1
+
+on init
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /storage/sdcard 0555 root root
+
+    export EXTERNAL_STORAGE /storage/sdcard
+
+    # Support legacy paths
+    #symlink /storage/sdcard /sdcard
+    #symlink /storage/sdcard /mnt/sdcard
+
+on boot
+# fake some battery state
+    setprop status.battery.state Slow
+    setprop status.battery.level 5
+    setprop status.battery.level_raw  50
+    setprop status.battery.level_scale 9
