@@ -32,3 +32,8 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			system/core/rootdir/init.rc:root/init.rc \
 			$(LOCAL_PATH)/init.rc:root/init.unknown.rc \
 			$(LOCAL_PATH)/fstab:root/fstab.unknown)
+
+PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
+	$(LOCAL_PATH)/a300_pfp.fw:root/lib/firmware/a300_pfp.fw \
+	$(LOCAL_PATH)/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
+)
