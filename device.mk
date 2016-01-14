@@ -31,6 +31,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			system/core/rootdir/init.rc:root/init.rc \
 			$(LOCAL_PATH)/init.rc:root/init.unknown.rc \
+			$(LOCAL_PATH)/ueventd.rc:root/ueventd.unknown.rc \
 			$(LOCAL_PATH)/fstab:root/fstab.unknown)
 
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
