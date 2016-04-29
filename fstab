@@ -5,3 +5,5 @@
 LABEL=system            /system             ext4      ro                                                    wait
 LABEL=cache             /cache              ext4      noatime,nosuid,nodev,errors=panic    wait
 LABEL=data              /data               ext4      noatime,nosuid,nodev,errors=panic    wait
+*/block/sd*             auto                auto      defaults  voldmanaged=usbdisk:auto,encryptable=userdata
+*/block/mmcblk*         auto                auto      defaults  voldmanaged=sdcard1:auto,encryptable=userdata
