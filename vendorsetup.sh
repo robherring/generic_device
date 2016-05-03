@@ -24,7 +24,7 @@
 
 create_devices() {
 	local a
-	local arches="arm64 x86_64"
+	local arches="arm arm64 x86_64"
 	local config_base="linaro"
 	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
 
@@ -32,12 +32,20 @@ create_devices() {
 		local config_name="${config_base}_${a}"
 		mkdir -p "${device_dir}/${config_name}"
 
+		if [ "$a" = "arm" ]; then
+			board="generic"
+			device_type=""
+		else
+			board="generic_$a"
+			device_type="_64"
+		fi
+
 		cat << EOF > ${device_dir}/${config_name}/AndroidProducts.mk
-PRODUCT_MAKEFILES := ${config_name}:\$(LOCAL_DIR)/../device.mk
+PRODUCT_MAKEFILES := ${config_name}:\$(LOCAL_DIR)/../device${device_type}.mk
 EOF
 
 		cat << EOF > ${device_dir}/${config_name}/BoardConfig.mk
-include \$(SRC_TARGET_DIR)/board/generic_${a}/BoardConfig.mk
+include \$(SRC_TARGET_DIR)/board/${board}/BoardConfig.mk
 include ${device_dir}/BoardConfig.mk
 EOF
 
