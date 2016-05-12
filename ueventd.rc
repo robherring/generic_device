@@ -1,2 +1,19 @@
+/sys/bus/iio/devices/iio:device* name 		0660 system system
+/sys/bus/iio/devices/iio:device* in_accel_scale 	0660 system system
+/sys/bus/iio/devices/iio:device* sampling_frequency 	0660 system system
+/sys/bus/iio/devices/iio:device* sampling_frequency_available 0660 system system
+/sys/bus/iio/devices/iio:device* buffer/enable	0660 system system
+/sys/bus/iio/devices/iio:device* buffer/length	0660 system system
+/sys/bus/iio/devices/iio:device* trigger/current_trigger 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_timestamp_en 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_accel_x_en 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_accel_y_en 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_accel_z_en 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_anglvel_x_en 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_anglvel_y_en 0660 system system
+/sys/bus/iio/devices/iio:device* scan_elements/in_anglvel_z_en 0660 system system
+/sys/bus/iio/devices/trigger* 	 name 0660 system system
+
 /dev/sw_sync              0660   root       graphics
+/dev/iio:device0          0660   system     system
 
