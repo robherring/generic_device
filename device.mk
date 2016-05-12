@@ -28,7 +28,9 @@ PRODUCT_PACKAGES += \
     libGLES_mesa \
     libGLES_android \
     hwcomposer.drm \
-    gralloc.drm
+    gralloc.drm \
+    sensors.iio \
+    activity_recognition.iio \
 
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			system/core/rootdir/init.rc:root/init.rc \

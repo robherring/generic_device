@@ -4,11 +4,15 @@ on fs
 on early-init
     mount debugfs debugfs /sys/kernel/debug
 
+
 #    setprop ro.kernel.qemu 1
 
     setprop ro.sf.lcd_density 160
     setprop ro.hardware.gralloc drm
     setprop ro.hardware.hwcomposer drm
+    setprop ro.hardware.sensors iio
+    setprop ro.hardware.activity_recognition iio
+
     setprop debug.sf.no_hw_vsync 1
     setprop hwc.drm.use_framebuffer_target 1
     setprop hwc.drm.use_overlay_planes 0
