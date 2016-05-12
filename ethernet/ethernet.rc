@@ -1,0 +1,10 @@
+
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL -f /system/etc/dhcpcd/dhcpcd.conf eth0
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n eth0
+    class late_start
+    disabled
+    oneshot
