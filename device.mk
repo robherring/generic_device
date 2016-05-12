@@ -40,3 +40,9 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 	$(LOCAL_PATH)/a300_pfp.fw:root/lib/firmware/a300_pfp.fw \
 	$(LOCAL_PATH)/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
 )
+
+subdirs-true :=
+$(info Including device subdirs: $(subdirs-true))
+
+include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/device.mk)
+DEVICE_PACKAGE_OVERLAYS += $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/overlay)
