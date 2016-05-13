@@ -41,6 +41,10 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 	$(LOCAL_PATH)/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
 )
 
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.screen.landscape.xml:system/etc/permissions/android.hardware.screen.landscape.xml \
+	frameworks/native/data/etc/android.hardware.screen.portrait.xml:system/etc/permissions/android.hardware.screen.portrait.xml
+
 subdirs-true :=
 $(info Including device subdirs: $(subdirs-true))
 
