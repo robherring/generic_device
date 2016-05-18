@@ -13,10 +13,13 @@
 # limitations under the License.
 #
 
+include $(dir $(lastword $(MAKEFILE_LIST)))/include/config/auto.conf
+
 BOARD_USES_DRM_HWCOMPOSER := true
 BOARD_GPU_DRIVERS := freedreno virgl
 
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 734003200 #700MB
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
-WITH_DEXPREOPT := false
+WITH_DEXPREOPT := $(if $(CONFIG_DEX_PREOPT), true, false)
+$(info $(WITH_DEXPREOPT))

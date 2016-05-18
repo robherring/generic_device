@@ -49,6 +49,13 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
 
-include $(wildcard $(LOCAL_PATH)/*/device.mk)
+#include $(wildcard $(LOCAL_PATH)/*/device.mk)
+include $(LOCAL_PATH)/include/config/auto.conf
+
+subdirs-y :=
+subdirs-$(CONFIG_ETHERNET) += ethernet
+
+include $(foreach dir,$(subdirs-y), $(LOCAL_PATH)/$(dir)/device.mk)
+$(info Including subdirs: $(subdirs-y))
 
 DEVICE_PACKAGE_OVERLAYS += $(wildcard $(LOCAL_PATH)/*/overlay)
