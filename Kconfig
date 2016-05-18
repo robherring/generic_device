@@ -1,6 +1,59 @@
+mainmenu "Android Device Configuration"
+
+menu "Image Configuration"
+
+config SYSTEMIMAGE_FS_TYPE
+	string
+	default "ext4" if SYSTEMIMAGE_FS_EXT4
+	default "squashfs" if SYSTEMIMAGE_FS_SQUASHFS
+
+choice
+	prompt "System Image Filesystem Type"
+	default SYSTEMIMAGE_FS_EXT4
+	help
+	  BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE
+
+config SYSTEMIMAGE_FS_EXT4
+	bool "ext4"
+
+config SYSTEMIMAGE_FS_SQUASHFS
+	bool "squashfs"
+
+endchoice
+
+config SYSTEMIMAGE_SIZE
+	int "System Image Size"
+	default 734003200
+	help
+	  BOARD_SYSTEMIMAGE_PARTITION_SIZE
+
+config DISABLE_SPARSE_USERIMAGES
+	bool "Disable sparse filesystem images"
+	help
+	  TARGET_USERIMAGES_SPARSE_EXT_DISABLED
 
 config DEX_PREOPT
-	bool "dex Pre-Optimations"
+	bool "Enable .dex Pre-Optimations at build time"
+
+endmenu
+
+menuconfig KERNEL
+	bool "Kernel"
+
+if KERNEL
+
+config KERNEL_PATH
+	string "Kernel Image path"
+	default "kernel"
+
+endif
+
+menu "Device Support"
 
 config ETHERNET
 	bool "Ethernet support"
+
+config SENSOR
+	bool "Sensor support"
+
+endmenu
