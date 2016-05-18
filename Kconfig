@@ -1,0 +1,6 @@
+
+config DEX_PREOPT
+	bool "dex Pre-Optimations"
+
+config ETHERNET
+	bool "Ethernet support"
