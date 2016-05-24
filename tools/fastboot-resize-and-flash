@@ -1,0 +1,59 @@
+#!/bin/sh -e
+#
+# Small script to resize Android partition images based on fastboot reported
+# partition sizes and then flash the images.
+#
+# Note: Only works on EXT4 images
+#
+
+usage() {
+	printf "Usage: $0 [-d <image directory>] [<partition list>]\n"
+	exit 1
+}
+
+image_path='.'
+partitions="system cache userdata"
+
+while getopts "srd:" opt
+do
+	case "$opt" in
+	r)	resize_only=1;;
+	d)	image_path=$OPTARG;;
+	[?])	usage;;
+	esac
+done
+shift $((OPTIND-1))
+
+if [ -n "$1" ]; then
+	partitions=$*
+fi
+
+if [ -z "$(fastboot devices)" ]; then
+	printf "No attached device found\n"
+	exit 1
+fi
+
+if [ "$(fastboot devices | cut -f1)" = "no permissions" ]; then
+	SUDO="sudo"
+fi
+
+for p in $partitions; do
+	if ! ${SUDO} fastboot getvar partition-type:$p 2>&1 | grep -q ext4; then
+		continue;
+	fi
+	size=$(printf "%d" "$(sudo fastboot getvar partition-size:$p 2>&1 | cut -d':' -f3)")
+	size=$((size / 512))
+	echo "Resizing $p to $((size / 2048)) MB..."
+
+	raw_image="${image_path}/$p.img.raw"
+	simg2img "${image_path}/$p.img" "${raw_image}"
+	resize2fs -p "${raw_image}" ${size}s
+	ext2simg "${raw_image}" "${image_path}/$p.img.resized"
+	rm "${raw_image}"
+done
+
+test -n "${resize_only}" && exit 0
+
+for p in $partitions; do
+	sudo fastboot -u flash $p "${image_path}/$p.img.resized"
+done
