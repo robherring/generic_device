@@ -1,0 +1,63 @@
+#!/bin/sh -e
+#
+# Small script to resize Android partition images based on fastboot reported
+# partition sizes and then flash the images.
+#
+# Note: Only works on EXT4 images
+#
+
+usage() {
+	printf "Usage: $0 [-d <image directory>] [<partition list>]\n"
+	exit 1
+}
+
+blkdev=/dev/mmcblk0
+image_path='.'
+partitions="system cache userdata"
+
+while getopts "srd:" opt
+do
+	case "$opt" in
+	r)	resize_only=1;;
+	d)	image_path=$OPTARG;;
+	[?])	usage;;
+	esac
+done
+shift $((OPTIND-1))
+
+if [ -n "$1" ]; then
+	partitions=$*
+fi
+
+for p in $partitions; do
+	label="$p"
+	[ "$p" = "userdata" ] && label="data"
+	
+	size=$(lsblk -prb -o NAME,SIZE,LABEL $blkdev | grep "$label" | cut -d' ' -f2)
+	[ -z "$size" ] && exit 1
+	
+	size=$((size / 512))
+	partdev=$(lsblk -prb -o NAME,SIZE,LABEL $blkdev | grep "$label" | cut -d' ' -f1)
+
+	echo "Resizing $p to $((size / 2048)) MB..."
+
+	raw_image="${image_path}/$p.img.raw"
+	simg2img "${image_path}/$p.img" "${raw_image}"
+	resize2fs -p "${raw_image}" ${size}s
+	ext2simg "${raw_image}" "${image_path}/$p.img.resized"
+	rm "${raw_image}"
+	
+	echo "Writing ${image_path}/$p.img.resized to $partdev..."
+#	sudo dd if="${raw_image}" of=${partdev} bs=1M
+	sudo simg2img "${image_path}/$p.img.resized" ${partdev}
+done
+
+echo "Syncing..."
+sync
+exit 0
+
+test -n "${resize_only}" && exit 0
+
+for p in $partitions; do
+	sudo fastboot -u flash $p "${image_path}/$p.img.resized"
+done
