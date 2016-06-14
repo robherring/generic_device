@@ -6,7 +6,6 @@ on early-init
 
 #    setprop ro.kernel.qemu 1
 
-    setprop ro.sf.lcd_density 160
     setprop ro.hardware.gralloc drm
     setprop ro.hardware.hwcomposer drm
     setprop debug.sf.no_hw_vsync 1
