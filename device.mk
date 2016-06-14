@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+include $(LOCAL_PATH)/config.mk
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
@@ -29,6 +31,10 @@ PRODUCT_PACKAGES += \
     libGLES_android \
     hwcomposer.drm \
     gralloc.drm
+
+PRODUCT_COPY_FILES-$(CONFIG_KERNEL) += \
+	$(call add-to-product-copy-files-if-exists,\
+		$(CONFIG_KERNEL_PATH):kernel)
 
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			system/core/rootdir/init.rc:root/init.rc \
@@ -46,7 +52,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.screen.portrait.xml:system/etc/permissions/android.hardware.screen.portrait.xml \
 
 subdirs-true :=
-$(info Including device subdirs: $(subdirs-true))
+subdirs-$(CONFIG_ETHERNET) += ethernet
+subdirs-$(CONFIG_SENSOR) += sensor
 
 include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/device.mk)
 DEVICE_PACKAGE_OVERLAYS += $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/overlay)
+
+PRODUCT_COPY_FILES += $(PRODUCT_COPY_FILES-true)
