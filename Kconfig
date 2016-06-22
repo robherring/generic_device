@@ -2,7 +2,7 @@ mainmenu "Android Device Configuration"
 
 menu "Image Configuration"
 
-config SYSTEMIMAGE_FS_TYPE
+config BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE
 	string
 	default "ext4" if SYSTEMIMAGE_FS_EXT4
 	default "squashfs" if SYSTEMIMAGE_FS_SQUASHFS
@@ -21,13 +21,13 @@ config SYSTEMIMAGE_FS_SQUASHFS
 
 endchoice
 
-config SYSTEMIMAGE_SIZE
+config BOARD_SYSTEMIMAGE_PARTITION_SIZE
 	int "System Image Size"
 	default 734003200
 	help
 	  BOARD_SYSTEMIMAGE_PARTITION_SIZE
 
-config DISABLE_SPARSE_USERIMAGES
+config TARGET_USERIMAGES_SPARSE_EXT_DISABLED
 	bool "Disable sparse filesystem images"
 	help
 	  TARGET_USERIMAGES_SPARSE_EXT_DISABLED
@@ -46,12 +46,16 @@ config KERNEL_PATH
 	string "Kernel Image path"
 	default "kernel"
 
-config KERNEL_CMDLINE
+config BOARD_KERNEL_CMDLINE
 	string "Kernel Command Line"
 	help
 	  Enter the kernel command line to be set in the bootimage.
 
 endif
+
+config TARGET_NO_KERNEL
+	bool
+	default !KERNEL
 
 menu "Device Support"
 

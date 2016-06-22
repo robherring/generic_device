@@ -355,8 +355,11 @@ endif # $(dot-config)
 # Defaults to vmlinux, but the arch makefile usually adds further targets
 all: config.mk
 
-config.mk: include/config/auto.conf
-	$(Q)sed -e 's/=y$$/=true/' -e 's/"//g' $< > $@
+config.mk: $(KCONFIG_CONFIG)
+	$(Q)sed -e 's/=y$$/=true/' -e 's/"//g' \
+	-e 's/CONFIG_\(\(BOARD\|TARGET\)\)/\1/' \
+	-e 's/^# \(.*\) is not set/\1=/' \
+	$< > $@
 
 # Things we need to do before we recursively start building the kernel
 # or the modules are listed in "prepare".
