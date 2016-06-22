@@ -65,4 +65,11 @@ config ETHERNET
 config SENSOR
 	bool "Sensor support"
 
+config BOARD_USES_DRM_HWCOMPOSER
+	bool "DRM HWComposer"
+
+config BOARD_GPU_DRIVERS
+	string "Mesa GPU drivers"
+	default "freedreno virgl"
+
 endmenu

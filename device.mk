@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 PRODUCT_PACKAGES += \
     libGLES_mesa \
     libGLES_android \
-    hwcomposer.drm \
+    $(if $(BOARD_USES_DRM_HWCOMPOSER),hwcomposer.drm,) \
     gralloc.drm
 
 PRODUCT_COPY_FILES-$(CONFIG_KERNEL) += \

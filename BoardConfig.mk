@@ -15,7 +15,4 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))/config.mk
 
-BOARD_USES_DRM_HWCOMPOSER := true
-BOARD_GPU_DRIVERS := freedreno virgl
-
 WITH_DEXPREOPT := $(CONFIG_DEX_PREOPT)
