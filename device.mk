@@ -36,6 +36,8 @@ PRODUCT_COPY_FILES-$(CONFIG_KERNEL) += \
 	$(call add-to-product-copy-files-if-exists,\
 		$(CONFIG_KERNEL_PATH):kernel)
 
+$(foreach dev,$(wildcard vendor/*/*/device-partial.mk), $(call inherit-product, $(dev)))
+
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			system/core/rootdir/init.rc:root/init.rc \
 			$(LOCAL_PATH)/init.rc:root/init.unknown.rc \
