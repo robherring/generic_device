@@ -59,6 +59,13 @@ config TARGET_NO_KERNEL
 
 menu "Device Support"
 
+menuconfig WIFI
+	bool "WiFi support"
+
+if WIFI
+
+endif
+
 config ETHERNET
 	bool "Ethernet support"
 

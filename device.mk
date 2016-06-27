@@ -57,6 +57,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 
 subdirs-true :=
+subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
 subdirs-$(CONFIG_SENSOR) += sensor
 
