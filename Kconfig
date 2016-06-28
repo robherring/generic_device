@@ -74,7 +74,11 @@ menuconfig WIFI
 
 if WIFI
 
+config QCOM_WIFI
+	bool "Qualcomm WCNSS wifi support"
+
 endif
+
 
 config ETHERNET
 	bool "Ethernet support"

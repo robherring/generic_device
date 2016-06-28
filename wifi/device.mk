@@ -12,3 +12,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 		wifi.interface=wlan0 \
 		wifi.supplicant_scan_interval=15
+
+
+subdirs-true :=
+subdirs-$(CONFIG_QCOM_WIFI) += qcom
+include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/wifi/$(dir)/device.mk)
+PRODUCT_COPY_FILES += $(PRODUCT_COPY_FILES-true)
