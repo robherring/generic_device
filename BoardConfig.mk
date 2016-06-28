@@ -15,6 +15,10 @@
 
 include $(dir $(lastword $(MAKEFILE_LIST)))/config.mk
 
+ifneq ($(CONFIG_RAMDISK_OFFSET),)
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(CONFIG_RAMDISK_OFFSET)
+endif
+
 WITH_DEXPREOPT := $(CONFIG_DEX_PREOPT)
 
 # generic wifi

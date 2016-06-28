@@ -51,6 +51,16 @@ config BOARD_KERNEL_CMDLINE
 	help
 	  Enter the kernel command line to be set in the bootimage.
 
+config BOARD_KERNEL_BASE
+	hex "Kernel Base Address"
+	help
+	  Base address to load the kernel
+
+config RAMDISK_OFFSET
+	hex "Ramdisk offset"
+	help
+	  Offset from Kernel Base Address to load the ramdisk
+
 endif
 
 config TARGET_NO_KERNEL
