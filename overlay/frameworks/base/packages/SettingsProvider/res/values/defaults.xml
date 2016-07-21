@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="def_screen_off_timeout">-1</integer>
+    <bool name="def_lockscreen_disabled">true</bool>
+    <bool name="def_stay_on_while_plugged_in">true</bool>
+</resources>
