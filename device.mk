@@ -56,6 +56,9 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc
+
 subdirs-true :=
 subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
