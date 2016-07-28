@@ -1,0 +1,6 @@
+on boot
+    setprop ro.hardware.gralloc drm
+    setprop ro.hardware.hwcomposer drm
+    setprop debug.sf.no_hw_vsync 1
+    setprop hwc.drm.use_framebuffer_target 1
+    setprop hwc.drm.use_overlay_planes 0

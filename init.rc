@@ -11,11 +11,6 @@ on early-init
 
 #    setprop ro.kernel.qemu 1
 
-    setprop ro.hardware.gralloc drm
-    setprop ro.hardware.hwcomposer drm
-    setprop debug.sf.no_hw_vsync 1
-    setprop hwc.drm.use_framebuffer_target 1
-    setprop hwc.drm.use_overlay_planes 0
 
 #    setprop debug.sf.nobootanimation 1
 #    setprop debug.egl.callstack 1

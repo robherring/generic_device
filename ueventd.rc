@@ -16,4 +16,5 @@
 
 /dev/sw_sync              0660   root       graphics
 /dev/iio:device0          0660   system     system
+/dev/mali                 0666   system     graphics
 

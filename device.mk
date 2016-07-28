@@ -26,11 +26,7 @@ PRODUCT_MODEL := AOSP
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-PRODUCT_PACKAGES += \
-    libGLES_mesa \
-    libGLES_android \
-    $(if $(BOARD_USES_DRM_HWCOMPOSER),hwcomposer.drm,) \
-    gralloc.drm
+PRODUCT_PACKAGES += libGLES_android
 
 PRODUCT_COPY_FILES-$(CONFIG_KERNEL) += \
 	$(call add-to-product-copy-files-if-exists,\
@@ -63,6 +59,7 @@ subdirs-true :=
 subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
 subdirs-$(CONFIG_SENSOR) += sensor
+subdirs-$(CONFIG_HWCOMPOSER) += graphics
 
 include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/device.mk)
 DEVICE_PACKAGE_OVERLAYS += $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/overlay)

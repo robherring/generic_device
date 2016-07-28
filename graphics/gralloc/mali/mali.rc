@@ -1,0 +1,7 @@
+on boot
+    setprop ro.hardware.gralloc mali
+
+on post-fs
+    chmod 0666 /dev/ump
+    chmod 0666 /dev/ion
+    chmod 0666 /dev/graphics/fb0
