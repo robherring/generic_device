@@ -1,0 +1,1 @@
+allow surfaceflinger sync_file:file rw_file_perms;

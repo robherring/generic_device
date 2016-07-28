@@ -1,0 +1,1 @@
+type sync_file, fs_type, debugfs_type;

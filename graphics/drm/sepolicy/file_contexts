@@ -1,0 +1,3 @@
+/dev/sw_sync           u:object_r:graphics_device:s0
+/sys/kernel/debug/sync         u:object_r:device:s0
+/sys/kernel/debug/sync(/.*)?          u:object_r:sync_file:s0
