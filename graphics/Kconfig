@@ -1,0 +1,29 @@
+menuconfig HW_GRAPHICS
+	bool "H/W Graphics support"
+	default y
+
+if HW_GRAPHICS
+
+config HWCOMPOSER
+	bool
+	default y if BOARD_USES_DRM_HWCOMPOSER
+	default y if GRALLOC_MALI
+
+choice
+	prompt "HWComposer support"
+	default BOARD_USES_DRM_HWCOMPOSER
+
+config BOARD_USES_DRM_HWCOMPOSER
+	bool "DRM HWComposer"
+
+config GRALLOC_MALI
+	bool "Gralloc support for Mali"
+
+endchoice
+
+config BOARD_GPU_DRIVERS
+	string "Mesa GPU drivers"
+	depends on BOARD_USES_DRM_HWCOMPOSER
+	default "freedreno virgl"
+
+endif

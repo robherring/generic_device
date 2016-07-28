@@ -1,0 +1,2 @@
+config ETHERNET
+	bool "Ethernet support"

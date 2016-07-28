@@ -1,0 +1,9 @@
+menuconfig WIFI
+	bool "WiFi support"
+
+if WIFI
+
+config QCOM_WIFI
+	bool "Qualcomm WCNSS wifi support"
+
+endif
