@@ -1,0 +1,8 @@
+.config*
+config.mk
+linaro_*
+include/
+scripts/basic/.*
+scripts/kconfig/.*
+*.o
+*.cmd
