@@ -16,7 +16,9 @@
 
 include $(LOCAL_PATH)/config.mk
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+include $(if $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
+include $(if $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
+
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_NAME := $(TARGET_PRODUCT)

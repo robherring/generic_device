@@ -1,5 +1,22 @@
 mainmenu "Android Device Configuration"
 
+choice
+	prompt "Device Type"
+	default TABLET
+
+config TABLET
+	bool "Tablet"
+
+config TV
+	bool "TV"
+	help
+	  Configure the build for Android TV device.
+
+	  This requires the LeanbackLauncher from fugu device available here:
+	  https://dl.google.com/dl/android/aosp/google-fugu-3096662-f2671c41.tgz
+
+endchoice
+
 menu "Image Configuration"
 
 config BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE
