@@ -17,6 +17,39 @@ config TV
 
 endchoice
 
+menu "Dalvik/ART Heap Configuration"
+# Default values are targeted towards 1G RAM
+
+config DALVIK_VM_HEAPSIZE
+	int "VM Heap Size (MB)"
+	default 256
+	range 32 768
+	help
+	  Typically this is sized to about 1/4 the total RAM size.
+
+config DALVIK_VM_HEAPSTARTSIZE
+	int "VM Heap Start Size (MB)"
+	default 8
+	range 5 32
+
+config DALVIK_VM_HEAPMAXFREE
+	int "VM Heap Max Free (MB)"
+	default 8
+	range 2 8
+	help
+	  This is the target free space after growing/shrinking the heap. It
+	  influences the frequency of garbage collection. Smaller values mean
+	  more frequent GC.
+
+config DALVIK_VM_HEAPGROWTHLIMIT
+	int "VM Heap Growth Limit (MB)"
+	default 96
+	range 96 256
+	help
+	  Typically this is less than half the heap size.
+
+endmenu
+
 menu "Image Configuration"
 
 config BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE

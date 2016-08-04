@@ -19,8 +19,6 @@ include $(LOCAL_PATH)/config.mk
 include $(if $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
 include $(if $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
 
-$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
-
 PRODUCT_NAME := $(TARGET_PRODUCT)
 PRODUCT_DEVICE := $(TARGET_PRODUCT)
 PRODUCT_BRAND := Android
@@ -56,6 +54,14 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize=$(CONFIG_DALVIK_VM_HEAPSTARTSIZE)m \
+    dalvik.vm.heapgrowthlimit=$(CONFIG_DALVIK_VM_HEAPGROWTHLIMIT)m \
+    dalvik.vm.heapsize=$(CONFIG_DALVIK_VM_HEAPSIZE)m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=$(CONFIG_DALVIK_VM_HEAPMAXFREE)m
 
 subdirs-true :=
 subdirs-$(CONFIG_WIFI) += wifi
