@@ -122,7 +122,6 @@ menu "Device Support"
 source "graphics/Kconfig"
 source "wifi/Kconfig"
 source "ethernet/Kconfig"
-source "wifi/Kconfig"
 source "sensor/Kconfig"
 
 endmenu
