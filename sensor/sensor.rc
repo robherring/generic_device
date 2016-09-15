@@ -1,3 +1,3 @@
-on init
+on boot
     setprop ro.hardware.sensors iio
     setprop ro.hardware.activity_recognition iio
