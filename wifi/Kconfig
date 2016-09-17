@@ -6,4 +6,7 @@ if WIFI
 config QCOM_WIFI
 	bool "Qualcomm WCNSS wifi support"
 
+config TI_WILINK_WIFI
+	bool "TI WILINK wifi support"
+
 endif
