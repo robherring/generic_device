@@ -20,6 +20,7 @@
 
 #include <malloc.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -36,6 +37,8 @@
 char const* const BACKLIGHT_PATH_BASE = "/sys/class/backlight/";
 
 char backlight_path[1024];
+
+long brightness_max;
 
 static int write_int(char const *path, int value)
 {
@@ -59,6 +62,20 @@ static int write_int(char const *path, int value)
 	}
 }
 
+static int read_int(char const *path)
+{
+	char buffer[20];
+	int amt;
+	int fd = open(path, O_RDWR);
+	if (fd < 0)
+		return -errno;
+
+	amt = read(fd, buffer, 20);
+	if (amt > 0)
+		return atoi(buffer);
+	return -1;
+}
+
 static int rgb_to_brightness(struct light_state_t const *state)
 {
 	int color = state->color & 0x00ffffff;
@@ -67,13 +84,33 @@ static int rgb_to_brightness(struct light_state_t const *state)
 			(29 * (color & 0x00ff))) >> 8;
 }
 
+
+static int normalize_brightness(int brightness, int max_brightness)
+{
+	int ret;
+
+	/*
+	 * API specifies argb which we convert to a 8bit
+	 * brightness value. This function then normalizes it
+	 * to the max_brightness range given
+	 */
+	ret = brightness * max_brightness;
+	ret = ret / 256;
+
+	return ret;
+}
+
 static int set_light_backlight(struct light_device_t *dev,
 		struct light_state_t const *state)
 {
+	char brightness_path[1024];
 	int err;
-	int brightness = rgb_to_brightness(state);
+	int brightness;
 
-	err = write_int(backlight_path, brightness);
+	snprintf(brightness_path, 1024, "%s/brightness", backlight_path);
+	brightness = rgb_to_brightness(state);
+	brightness = normalize_brightness(brightness, brightness_max);
+	err = write_int(brightness_path, brightness);
 
 	return err;
 }
@@ -95,6 +132,7 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 			struct light_state_t const *state);
 	DIR *dir;
 	struct dirent *entry;
+	char buffer[1024];
 
 	if (dev == NULL) {
 		ALOGE("failed to allocate memory");
@@ -117,10 +155,13 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 		if (entry->d_type == DT_DIR) {
 			continue;
 		}
-		sprintf(backlight_path, "%s%s/brightness", BACKLIGHT_PATH_BASE, entry->d_name);
+		sprintf(backlight_path, "%s%s", BACKLIGHT_PATH_BASE, entry->d_name);
 	} while (entry = readdir(dir));
 	closedir(dir);
 
+	snprintf(buffer, 1024, "%s/max_brightness", backlight_path);
+	brightness_max = read_int(buffer);
+	ALOGE("JDB: brightness_max: %ld\n", brightness_max);
 
 	dev->common.tag = HARDWARE_DEVICE_TAG;
 	dev->common.version = 0;
