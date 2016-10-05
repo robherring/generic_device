@@ -1,5 +1,8 @@
 on boot
 # Create ConfigFS USB gadgets and add standard gadget entries
+    # Must set port or listening on USB will disable TCP
+    setprop persist.adb.tcp.port 5555
+
     mkdir /dev/usb-ffs 0770 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount configfs none /config
