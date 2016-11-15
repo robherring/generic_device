@@ -19,4 +19,3 @@ subdirs-true :=
 subdirs-$(CONFIG_QCOM_WIFI) += qcom
 subdirs-$(CONFIG_TI_WILINK_WIFI) += ti_wilink
 include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/wifi/$(dir)/device.mk)
-PRODUCT_COPY_FILES += $(PRODUCT_COPY_FILES-true)
