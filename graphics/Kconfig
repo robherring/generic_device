@@ -1,8 +1,9 @@
-menuconfig HW_GRAPHICS
-	bool "H/W Graphics support"
-	default y
+menu "Graphics support"
 
-if HW_GRAPHICS
+config SW_GRAPHICS
+	bool "Use Software rendering"
+
+if !SW_GRAPHICS
 
 config HWCOMPOSER
 	bool
@@ -27,3 +28,4 @@ config BOARD_GPU_DRIVERS
 	default "freedreno virgl"
 
 endif
+endmenu

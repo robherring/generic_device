@@ -26,8 +26,6 @@ PRODUCT_MODEL := AOSP
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-PRODUCT_PACKAGES += libGLES_android
-
 PRODUCT_COPY_FILES-$(CONFIG_KERNEL) += \
 	$(call add-to-product-copy-files-if-exists,\
 		$(CONFIG_KERNEL_PATH):kernel)
@@ -67,13 +65,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=$(CONFIG_DALVIK_VM_HEAPMAXFREE)m
 
-subdirs-true := lights
+subdirs-true := lights graphics
 subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
 subdirs-$(CONFIG_SENSOR) += sensor
-subdirs-$(CONFIG_HWCOMPOSER) += graphics
 
 include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/device.mk)
 DEVICE_PACKAGE_OVERLAYS += $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/overlay)
 
 PRODUCT_COPY_FILES += $(PRODUCT_COPY_FILES-true)
+PRODUCT_PROPERTY_OVERRIDES += $(PRODUCT_PROPERTY_OVERRIDES-true)
+PRODUCT_PACKAGES += $(PRODUCT_PACKAGES-true)
