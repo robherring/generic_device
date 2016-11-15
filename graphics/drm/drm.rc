@@ -1,4 +1,11 @@
 on boot
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 755 /sys/kernel/debug
+    chmod 755 /sys/kernel/debug/sync
+    chown graphics graphics /sys/kernel/debug/sync/sw_sync
+    chmod 777 /sys/kernel/debug/sync/sw_sync
+    chown graphics graphics /sys/kernel/debug/sync/info
+
     setprop ro.hardware.gralloc drm
     setprop ro.hardware.hwcomposer drm
     setprop debug.sf.no_hw_vsync 1

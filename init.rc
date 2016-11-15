@@ -1,21 +1,6 @@
 on fs
     mount_all /fstab.unknown
 
-on early-init
-    mount debugfs debugfs /sys/kernel/debug
-    chmod 755 /sys/kernel/debug
-    chmod 755 /sys/kernel/debug/sync
-    chown graphics graphics /sys/kernel/debug/sync/sw_sync
-    chmod 777 /sys/kernel/debug/sync/sw_sync
-    chown graphics graphics /sys/kernel/debug/sync/info
-
-#    setprop ro.kernel.qemu 1
-
-
-#    setprop debug.sf.nobootanimation 1
-#    setprop debug.egl.callstack 1
-#    setprop debug.egl.trace 1
-
 on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /storage/sdcard 0555 root root
