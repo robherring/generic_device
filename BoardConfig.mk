@@ -35,3 +35,9 @@ BOARD_FLASH_BLOCK_SIZE := 512
 
 BOARD_SEPOLICY_DIRS += \
         build/target/board/generic/sepolicy \
+
+ifeq ($(TARGET_SUPPORTS_32_BIT_APPS),true)
+AUDIOSERVER_MULTILIB := 32
+else
+AUDIOSERVER_MULTILIB := 64
+endif
