@@ -22,34 +22,88 @@
 
 # Note: all variables must be local or they get sourced.
 
+gen_arm64_only() {
+	echo 'TARGET_ARCH := arm64'
+	echo 'TARGET_ARCH_VARIANT := armv8-a'
+	echo 'TARGET_CPU_VARIANT := generic'
+	echo 'TARGET_CPU_ABI := arm64-v8a'
+
+	echo 'TARGET_USES_64_BIT_BINDER := true'
+}
+
+gen_arm64() {
+	gen_arm64_only
+
+	echo 'TARGET_2ND_ARCH := arm'
+	echo 'TARGET_2ND_ARCH_VARIANT := armv7-a-neon'
+	echo 'TARGET_2ND_CPU_VARIANT := cortex-a15'
+	echo 'TARGET_2ND_CPU_ABI := armeabi-v7a'
+	echo 'TARGET_2ND_CPU_ABI2 := armeabi'
+}
+
+gen_arm() {
+	echo 'TARGET_ARCH := arm'
+	echo 'TARGET_ARCH_VARIANT := armv7-a'
+	echo 'TARGET_CPU_VARIANT := generic'
+	echo 'TARGET_CPU_ABI := armeabi-v7a'
+	echo 'TARGET_CPU_ABI2 := armeabi'
+}
+
+gen_x86_64_only() {
+	echo 'TARGET_ARCH := x86_64'
+	echo 'TARGET_ARCH_VARIANT := x86_64'
+	echo 'TARGET_CPU_ABI := x86_64'
+
+	echo 'TARGET_USES_64_BIT_BINDER := true'
+}
+
+gen_x86_64() {
+	gen_x86_64_only
+
+	echo 'TARGET_2ND_ARCH := x86'
+	echo 'TARGET_2ND_ARCH_VARIANT := x86_64'
+	echo 'TARGET_2ND_CPU_ABI := x86'
+}
+
+gen_device() {
+	local config_base="linaro"
+	local config_name="${config_base}_$1"
+	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
+	local device_mk="device"
+
+	case "$1" in
+	*64)
+		local device_mk="device_64"
+		;;
+	*64_only)
+		local device_mk="device_64only"
+		;;
+	*)
+		local device_mk="device"
+		;;
+	esac
+
+	mkdir -p "${device_dir}/${config_name}"
+
+	cat << EOF > ${device_dir}/${config_name}/AndroidProducts.mk
+PRODUCT_MAKEFILES := ${config_name}:\$(LOCAL_DIR)/../${device_mk}.mk
+EOF
+
+	gen_${1} > ${device_dir}/${config_name}/BoardConfig.mk
+	echo "include ${device_dir}/BoardConfig.mk" >> ${device_dir}/${config_name}/BoardConfig.mk
+
+	add_lunch_combo ${config_name}-userdebug
+
+}
+
 create_devices() {
 	local a
 	local arches="arm arm64 x86_64"
-	local config_base="linaro"
-	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
-
 	for a in $arches; do
-		local config_name="${config_base}_${a}"
-		mkdir -p "${device_dir}/${config_name}"
-
-		if [ "$a" = "arm" ]; then
-			board="generic"
-			device_type=""
-		else
-			board="generic_$a"
-			device_type="_64"
+		gen_device $a
+		if $(echo $a | grep -q "64"); then
+			gen_device ${a}_only
 		fi
-
-		cat << EOF > ${device_dir}/${config_name}/AndroidProducts.mk
-PRODUCT_MAKEFILES := ${config_name}:\$(LOCAL_DIR)/../device${device_type}.mk
-EOF
-
-		cat << EOF > ${device_dir}/${config_name}/BoardConfig.mk
-include \$(SRC_TARGET_DIR)/board/${board}/BoardConfig.mk
-include ${device_dir}/BoardConfig.mk
-EOF
-
-		add_lunch_combo ${config_name}-userdebug
 	done
 }
 create_devices
