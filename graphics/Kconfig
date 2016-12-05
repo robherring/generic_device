@@ -1,7 +1,7 @@
 menu "Graphics support"
 
 config SW_GRAPHICS
-	bool "Use Software rendering"
+	bool "Force Software rendering"
 
 if !SW_GRAPHICS
 

@@ -1,4 +1,9 @@
-on boot
+on early-boot
+    # This will only get set if not already set and may be overriden by the
+    # build or on kernel command line for s/w rendering
+    setprop ro.kernel.qemu 0
+
+on boot && property:ro.kernel.qemu=0
     mount debugfs debugfs /sys/kernel/debug
     chmod 755 /sys/kernel/debug
     chmod 755 /sys/kernel/debug/sync
