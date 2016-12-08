@@ -13,7 +13,10 @@
 # limitations under the License.
 #
 
-include $(dir $(lastword $(MAKEFILE_LIST)))/config.mk
+# LOCAL_PATH doesn't work here
+DEV_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+
+include $(DEV_DIR)/config.mk
 
 ifneq ($(CONFIG_RAMDISK_OFFSET),)
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(CONFIG_RAMDISK_OFFSET)
@@ -34,7 +37,8 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 512
 
 BOARD_SEPOLICY_DIRS += \
-        build/target/board/generic/sepolicy \
+	build/target/board/generic/sepolicy \
+	$(DEV_DIR)/sepolicy
 
 ifeq ($(TARGET_SUPPORTS_32_BIT_APPS),true)
 AUDIOSERVER_MULTILIB := 32

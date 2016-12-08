@@ -55,7 +55,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc
+    $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc \
+    $(LOCAL_PATH)/init.sh:system/bin/init.sh \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapstartsize=$(CONFIG_DALVIK_VM_HEAPSTARTSIZE)m \

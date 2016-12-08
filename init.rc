@@ -12,6 +12,24 @@ on init
     #symlink /storage/sdcard /mnt/sdcard
 
 on boot
+    exec -- /system/bin/init.sh
+
+    # update cpuset now that processors are up
+    # This setup depends on ro.maxcpu being set, at least 4 cores, and
+    # assumes homogeneous cores.
+    # The constraints are:
+    #   CPU 0 is reserved for the top app
+    #   background is limited to the last CPU
+
+    # First, reset foreground to all cpus, so boost can be modified
+    write /dev/cpuset/foreground/cpus 0-${ro.maxcpu}
+
+    write /dev/cpuset/foreground/boost/cpus 1-${ro.maxcpu}
+    write /dev/cpuset/foreground/cpus 1-${ro.maxcpu}
+    write /dev/cpuset/background/cpus ${ro.maxcpu}
+    write /dev/cpuset/system-background/cpus 1-${ro.maxcpu}
+    write /dev/cpuset/top-app/cpus 0-${ro.maxcpu}
+
 # fake some battery state
     setprop status.battery.state Slow
     setprop status.battery.level 5
