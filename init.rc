@@ -1,5 +1,6 @@
 on fs
     mount_all /fstab.unknown
+    swapon_all /fstab.unknown
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
