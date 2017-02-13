@@ -120,6 +120,13 @@ config TARGET_NO_KERNEL
 menu "Device Support"
 
 source "graphics/Kconfig"
+
+config BOARD_HAVE_BLUETOOTH_LINUX
+	bool "Bluetooth support"
+	help
+	  Select to enable Bluetooth support using standard Linux kernel BT
+	  drivers.
+
 source "wifi/Kconfig"
 source "ethernet/Kconfig"
 source "sensor/Kconfig"
