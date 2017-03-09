@@ -1,6 +1,8 @@
 PRODUCT_PROPERTY_OVERRIDES-$(CONFIG_SW_GRAPHICS) += ro.kernel.qemu=1
 
-PRODUCT_PACKAGES-true += libGLES_android
+PRODUCT_PACKAGES-true += libGLES_android \
+	libGLESv2_swiftshader \
+	libEGL_swiftshader \
 
 subdirs-true :=
 subdirs-$(BOARD_USES_DRM_HWCOMPOSER) += drm

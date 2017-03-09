@@ -41,6 +41,7 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 	$(LOCAL_PATH)/a300_pfp.fw:root/lib/firmware/a300_pfp.fw \
 	$(LOCAL_PATH)/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
+	$(LOCAL_PATH)/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq:root/lib/firmware/intel/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq \
 )
 
 PRODUCT_COPY_FILES += \
@@ -54,6 +55,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 
+PRODUCT_COPY_FILES-$(BOARD_HAVE_BLUETOOTH_LINUX) += \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc \
     $(LOCAL_PATH)/init.sh:system/bin/init.sh \
@@ -65,6 +70,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heaptargetutilization=0.75 \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=$(CONFIG_DALVIK_VM_HEAPMAXFREE)m
+
+PRODUCT_PACKAGES-$(BOARD_HAVE_BLUETOOTH_LINUX) += \
+	android.hardware.bluetooth@1.0-service \
+	android.hardware.bluetooth@1.0-impl
 
 subdirs-true := lights graphics
 subdirs-$(CONFIG_WIFI) += wifi
