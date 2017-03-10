@@ -1,5 +1,87 @@
 mainmenu "Android Device Configuration"
 
+menu "Target Architecture"
+
+choice
+	prompt "Target Arch"
+	default ARCH_ARM64
+
+config ARCH_ARM
+	bool "arm"
+
+config ARCH_ARM64
+	bool "arm64"
+	select 64_BIT
+
+config ARCH_X86_64
+	bool "x86_64"
+	select 64_BIT
+
+endchoice
+
+config 64_BIT
+	bool
+
+config HAS_2ND_ARCH
+	bool "Include 2nd Arch" if 64_BIT
+	default y
+
+config TARGET_ARCH
+	string
+	default "arm" if ARCH_ARM
+	default "arm64" if ARCH_ARM64
+	default "x86_64" if ARCH_X86_64
+
+config TARGET_ARCH_VARIANT
+	string
+	default "armv7-a" if ARCH_ARM
+	default "armv8-a" if ARCH_ARM64
+	default "x86_64" if ARCH_X86_64
+
+config TARGET_CPU_VARIANT
+	string
+	default "generic"
+
+config TARGET_CPU_ABI
+	string
+	default "armeabi-v7a" if ARCH_ARM
+	default "arm64-v8a" if ARCH_ARM64
+	default "x86_64" if ARCH_X86_64
+
+config TARGET_CPU_ABI2
+	string
+	default "armeabi" if ARCH_ARM
+
+if HAS_2ND_ARCH
+
+config TARGET_2ND_ARCH
+	string
+	default "arm" if ARCH_ARM64
+	default "x86" if ARCH_X86_64
+
+config TARGET_2ND_ARCH_VARIANT
+	string
+	default "armv7-a-neon" if ARCH_ARM64
+	default "x86_64" if ARCH_X86_64
+
+config TARGET_2ND_CPU_VARIANT
+	string
+	default "cortex-a15" if ARCH_ARM64
+
+config TARGET_2ND_CPU_ABI
+	string
+	default "armeabi-v7a" if ARCH_ARM64
+	default "x86" if ARCH_X86_64
+
+config TARGET_2ND_CPU_ABI2
+	string
+	default "armeabi" if ARCH_ARM64
+
+endif
+
+config TARGET_USES_64_BIT_BINDER
+	def_bool ARCH_ARM64 || ARCH_X86_64
+
 choice
 	prompt "Device Type"
 	default TABLET
@@ -16,6 +98,7 @@ config TV
 	  https://dl.google.com/dl/android/aosp/google-fugu-3096662-f2671c41.tgz
 
 endchoice
+endmenu
 
 menu "Dalvik/ART Heap Configuration"
 # Default values are targeted towards 1G RAM

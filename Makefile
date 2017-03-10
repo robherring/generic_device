@@ -122,8 +122,9 @@ _all:
 # Cancel implicit rules on top Makefile
 $(CURDIR)/Makefile Makefile: ;
 
-ifneq ($(KBUILD_OUTPUT),)
-$(error KBUILD_OUTPUT is not supported)
+ifeq ($(KBUILD_OUTPUT),)
+$(error KBUILD_OUTPUT must be set)
+endif
 # Invoke a second make in the output directory, passing relevant variables
 # check that the output directory actually exists
 saved-output := $(KBUILD_OUTPUT)
@@ -143,7 +144,6 @@ sub-make: FORCE
 
 # Leave processing to above invocation of make
 skip-makefile := 1
-endif # ifneq ($(KBUILD_OUTPUT),)
 endif # ifeq ($(KBUILD_SRC),)
 
 # We process the rest of the Makefile if this is the final invocation of make
@@ -237,17 +237,6 @@ scripts_basic:
 # To avoid any implicit rule to kick in, define an empty command.
 scripts/basic/%: scripts_basic ;
 
-PHONY += outputmakefile
-# outputmakefile generates a Makefile in the output directory, if using a
-# separate output directory. This allows convenient use of make in the
-# output directory.
-outputmakefile:
-ifneq ($(KBUILD_SRC),)
-	$(Q)ln -fsn $(srctree) source
-	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/mkmakefile \
-	    $(srctree) $(objtree) $(VERSION) $(PATCHLEVEL)
-endif
-
 # To make sure we do not include .config for any of the *config targets
 # catch them early, and hand them over to scripts/kconfig/Makefile
 # It is allowed to specify more targets when calling make, including
@@ -308,10 +297,10 @@ ifeq ($(config-targets),1)
 KBUILD_DEFCONFIG=defconfig
 export KBUILD_DEFCONFIG
 
-config: scripts_basic outputmakefile FORCE
+config: scripts_basic FORCE
 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
 
-%config: scripts_basic outputmakefile FORCE
+%config: scripts_basic FORCE
 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
 
 else
@@ -384,7 +373,7 @@ ifneq ($(KBUILD_SRC),)
 endif
 
 # prepare2 creates a makefile if using a separate output directory
-prepare2: prepare3 outputmakefile
+prepare2: prepare3
 
 prepare1: prepare2 include/config/auto.conf
 
