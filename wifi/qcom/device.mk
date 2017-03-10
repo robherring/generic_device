@@ -5,11 +5,11 @@ PRODUCT_PACKAGES += \
 		qcom-wifi.rc \
 
 PRODUCT_COPY_FILES += \
-	device/linaro/generic/wifi/qcom/start_qcom_wifi.sh:system/bin/start_qcom_wifi.sh \
-	device/linaro/generic/wifi/qcom/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
-	device/linaro/generic/wifi/qcom/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-	device/linaro/generic/wifi/qcom/WCNSS_qcom_wlan_nv_flo.bin:system/etc/wifi/WCNSS_qcom_wlan_nv_flo.bin \
-	device/linaro/generic/wifi/qcom/WCNSS_qcom_wlan_nv_deb.bin:system/etc/wifi/WCNSS_qcom_wlan_nv_deb.bin
+	$(LOCAL_PATH)/wifi/qcom/start_qcom_wifi.sh:system/bin/start_qcom_wifi.sh \
+	$(LOCAL_PATH)/wifi/qcom/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
+	$(LOCAL_PATH)/wifi/qcom/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+	$(LOCAL_PATH)/wifi/qcom/WCNSS_qcom_wlan_nv_flo.bin:system/etc/wifi/WCNSS_qcom_wlan_nv_flo.bin \
+	$(LOCAL_PATH)/wifi/qcom/WCNSS_qcom_wlan_nv_deb.bin:system/etc/wifi/WCNSS_qcom_wlan_nv_deb.bin
 
 BOARD_SEPOLICY_DIRS += \
-	device/linaro/generic/wifi/qcom/sepolicy
+	$(LOCAL_PATH)/wifi/qcom/sepolicy
