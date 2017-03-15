@@ -22,6 +22,27 @@
 
 # Note: all variables must be local or they get sourced.
 
+target_config() {
+	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
+
+	pushd ${device_dir} > /dev/null
+
+	make menuconfig all
+
+	popd > /dev/null
+}
+
+target_save_config() {
+	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
+
+	pushd ${device_dir} > /dev/null
+
+	make savedefconfig
+	cp ${TARGET_PRODUCT}/defconfig configs/${TARGET_PRODUCT}_defconfig
+
+	popd > /dev/null
+}
+
 create_devices() {
 	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
 
