@@ -123,7 +123,7 @@ _all:
 $(CURDIR)/Makefile Makefile: ;
 
 ifeq ($(KBUILD_OUTPUT),)
-$(error KBUILD_OUTPUT must be set)
+  KBUILD_OUTPUT := $(TARGET_PRODUCT)
 endif
 # Invoke a second make in the output directory, passing relevant variables
 # check that the output directory actually exists
