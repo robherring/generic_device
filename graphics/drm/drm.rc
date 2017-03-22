@@ -11,7 +11,7 @@ on early-boot && property:ro.kernel.qemu=0
     chmod 777 /sys/kernel/debug/sync/sw_sync
     chown graphics graphics /sys/kernel/debug/sync/info
 
-    setprop ro.hardware.gralloc drm
+    setprop ro.hardware.gralloc gbm
     setprop ro.hardware.hwcomposer drm
     setprop debug.sf.no_hw_vsync 1
     setprop hwc.drm.use_framebuffer_target 1
