@@ -1,5 +1,4 @@
-PRODUCT_PACKAGES += mali.rc
-
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES := \
+    mali.rc \
     libion \
     gralloc.mali

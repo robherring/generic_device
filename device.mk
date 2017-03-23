@@ -14,6 +14,20 @@
 # limitations under the License.
 #
 
+define inherit-product-dirs
+ $(foreach dir,$(1), \
+   $(call inherit-product-if-exists, $(LOCAL_PATH)/$(dir)/device.mk) \
+ )
+endef
+
+define inherit-product-if-true
+ $(call inherit-product-if-exists, $(if $(filter true,$(1)),$(2)))
+endef
+
+define add-to-product-copy-files-if-true
+ $(call add-to-product-copy-files-if-exists, $(if $(filter true,$(1)),$(2)))
+endef
+
 include $(LOCAL_PATH)/$(TARGET_PRODUCT)/config.mk
 
 ifneq ($(CONFIG_64_BIT),)
@@ -24,8 +38,8 @@ else
 endif
 endif
 
-include $(if $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
-include $(if $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
+$(call inherit-product-if-true, $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
+$(call inherit-product-if-true, $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
 
 PRODUCT_NAME := $(TARGET_PRODUCT)
 PRODUCT_DEVICE := $(TARGET_PRODUCT)
@@ -33,8 +47,8 @@ PRODUCT_BRAND := Android
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-PRODUCT_COPY_FILES-$(CONFIG_KERNEL) += \
-	$(call add-to-product-copy-files-if-exists,\
+PRODUCT_COPY_FILES += \
+	$(call add-to-product-copy-files-if-true, $(CONFIG_KERNEL), \
 		$(CONFIG_KERNEL_PATH):kernel)
 
 $(foreach dev,$(wildcard vendor/*/*/device-partial.mk), $(call inherit-product, $(dev)))
@@ -77,10 +91,4 @@ subdirs-true := lights graphics
 subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
 subdirs-$(CONFIG_SENSOR) += sensor
-
-include $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/device.mk)
-DEVICE_PACKAGE_OVERLAYS += $(foreach dir,$(subdirs-true), $(LOCAL_PATH)/$(dir)/overlay)
-
-PRODUCT_COPY_FILES += $(PRODUCT_COPY_FILES-true)
-PRODUCT_PROPERTY_OVERRIDES += $(PRODUCT_PROPERTY_OVERRIDES-true)
-PRODUCT_PACKAGES += $(PRODUCT_PACKAGES-true)
+$(call inherit-product-dirs, $(subdirs-true))

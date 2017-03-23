@@ -1,4 +1,3 @@
-PRODUCT_PACKAGES += lights.default
-PRODUCT_PACKAGES += lights.rc
-
-
+PRODUCT_PACKAGES := \
+	lights.default \
+	lights.rc

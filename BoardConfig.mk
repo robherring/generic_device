@@ -43,3 +43,12 @@ AUDIOSERVER_MULTILIB := 32
 else
 AUDIOSERVER_MULTILIB := 64
 endif
+
+define include-board-configs
+ $(foreach dir, $(1), \
+  $(eval LOCAL_PATH := $(DEV_DIR)/$(dir)) \
+  $(eval sinclude $(LOCAL_PATH)/BoardConfig.mk) \
+ )
+endef
+
+$(call include-board-configs, wifi/qcom)

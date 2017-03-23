@@ -15,10 +15,10 @@
 #
 
 # Copy the 64-bit primary, 32-bit secondary zygote startup script
-PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64.rc:root/init.zygote64.rc
+PRODUCT_COPY_FILES := system/core/rootdir/init.zygote64.rc:root/init.zygote64.rc
 
 # Set the zygote property to select the 64-bit primary, 32-bit secondary script
 # This line must be parsed before the one in core_minimal.mk
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES := ro.zygote=zygote64
 
 TARGET_SUPPORTS_64_BIT_APPS := true
