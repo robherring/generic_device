@@ -22,6 +22,11 @@ endchoice
 config 64_BIT
 	bool
 
+config HAS_ARM_NEON
+	bool "Enable ARM Neon Support"
+	depends on ARCH_ARM
+	default y
+
 config HAS_2ND_ARCH
 	bool "Include 2nd Arch" if 64_BIT
 	default y
@@ -35,6 +40,7 @@ config TARGET_ARCH
 config TARGET_ARCH_VARIANT
 	string
 	default "armv7-a" if ARCH_ARM
+	default "armv7-a-neon" if HAS_ARM_NEON
 	default "armv8-a" if ARCH_ARM64
 	default "x86_64" if ARCH_X86_64
 
