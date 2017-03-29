@@ -1,5 +1,6 @@
 menuconfig WIFI
 	bool "WiFi support"
+	default y
 
 if WIFI
 
