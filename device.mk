@@ -28,8 +28,6 @@ define add-to-product-copy-files-if-true
  $(call add-to-product-copy-files-if-exists, $(if $(filter true,$(1)),$(2)))
 endef
 
-include $(LOCAL_PATH)/$(TARGET_PRODUCT)/config.mk
-
 ifneq ($(CONFIG_64_BIT),)
 ifeq ($(CONFIG_HAS_2ND_ARCH),)
         $(call inherit-product, $(LOCAL_PATH)/device_64only.mk)
@@ -42,7 +40,6 @@ $(call inherit-product-if-true, $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
 $(call inherit-product-if-true, $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
 
 PRODUCT_NAME := $(TARGET_PRODUCT)
-PRODUCT_DEVICE := $(TARGET_PRODUCT)
 PRODUCT_BRAND := Android
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay

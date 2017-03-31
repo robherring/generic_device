@@ -49,16 +49,31 @@ create_devices() {
 	pushd ${device_dir} > /dev/null
 
 	for f in configs/*_defconfig; do
-		defconfig=$(basename "${f}")
-		config_name=$(basename "${f}" _defconfig)
+		local defconfig=$(basename "${f}")
+		local config_name=$(basename "${f}" _defconfig)
+
 		command make O=${config_name} ${defconfig} all > /dev/null 2> /dev/null
 
+		local prod_dev=$(sed -n -e 's/CONFIG_PRODUCT_DEVICE=\(.*\)/\1/p' ${config_name}/config.mk)
+		if [ -z "${prod_dev}" ]; then
+			local prod_dev=linaro_$(sed -n -e 's/TARGET_ARCH=\(.*\)/\1/p' ${config_name}/config.mk)
+		fi
+
 		cat << EOF > ${config_name}/AndroidProducts.mk
-PRODUCT_MAKEFILES := ${config_name}:\$(LOCAL_DIR)/../device.mk
+PRODUCT_MAKEFILES := ${config_name}:\$(LOCAL_DIR)/device.mk
 EOF
 
-		cat << EOF > ${config_name}/BoardConfig.mk
-include ${device_dir}/${config_name}/config.mk
+		cat << EOF > ${config_name}/device.mk
+include \$(LOCAL_PATH)/config.mk
+
+\$(call inherit-product, \$(LOCAL_PATH)/../device.mk)
+
+PRODUCT_DEVICE := ${prod_dev}
+EOF
+
+		mkdir -p ${prod_dev}
+		cat << EOF > ${prod_dev}/BoardConfig.mk
+include ${device_dir}/\$(TARGET_PRODUCT)/config.mk
 include ${device_dir}/BoardConfig.mk
 EOF
 		add_lunch_combo ${config_name}-userdebug

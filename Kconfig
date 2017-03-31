@@ -85,6 +85,12 @@ config TARGET_2ND_CPU_ABI2
 
 endif
 
+config PRODUCT_DEVICE
+	string "Target Product Device"
+	help
+	  This is the device name used for the build output. Set it only
+	  to have a custom non-shared build.
+
 config TARGET_USES_64_BIT_BINDER
 	def_bool ARCH_ARM64 || ARCH_X86_64
 
