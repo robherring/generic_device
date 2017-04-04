@@ -22,6 +22,10 @@ config GRALLOC_MALI
 
 endchoice
 
+config TARGET_USES_HWC2
+	bool "HWComposer 2 support"
+	depends on BOARD_USES_DRM_HWCOMPOSER
+
 config BOARD_GPU_DRIVERS
 	string "Mesa GPU drivers"
 	depends on BOARD_USES_DRM_HWCOMPOSER
