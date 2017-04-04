@@ -11,7 +11,7 @@ usage() {
 	exit 1
 }
 
-image_path='.'
+image_path=${ANDROID_PRODUCT_OUT}
 partitions="system cache userdata"
 
 while getopts "srd:" opt
@@ -38,6 +38,10 @@ if [ "$(fastboot devices | cut -c-14)" = "no permissions" ]; then
 fi
 
 for p in $partitions; do
+	if ! [ -f "${image_path}/$p.img" ]; then
+		exit 1
+	fi
+
 	if ! ${SUDO} fastboot getvar partition-type:$p 2>&1 | grep -q ext4; then
 		continue;
 	fi
