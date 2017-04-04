@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/google/atv/products/atv_base.mk)
-
 PRODUCT_CHARACTERISTICS := tv
 
-PRODUCT_PACKAGES := $(if $(CONFIG_TV), LeanbackLauncher)
+PRODUCT_PACKAGES := LeanbackLauncher
+
+$(call inherit-product, device/google/atv/products/atv_base.mk)
