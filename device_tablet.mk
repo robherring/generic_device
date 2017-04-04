@@ -13,5 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+PRODUCT_COPY_FILES := \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
