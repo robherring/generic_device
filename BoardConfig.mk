@@ -38,12 +38,6 @@ BOARD_SEPOLICY_DIRS += \
 	build/target/board/generic/sepolicy \
 	$(DEV_DIR)/sepolicy
 
-ifeq ($(TARGET_SUPPORTS_32_BIT_APPS),true)
-AUDIOSERVER_MULTILIB := 32
-else
-AUDIOSERVER_MULTILIB := 64
-endif
-
 define include-board-configs
  $(foreach dir, $(1), \
   $(eval LOCAL_PATH := $(DEV_DIR)/$(dir)) \

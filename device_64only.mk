@@ -22,3 +22,5 @@ PRODUCT_COPY_FILES := system/core/rootdir/init.zygote64.rc:root/init.zygote64.rc
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := ro.zygote=zygote64
 
 TARGET_SUPPORTS_64_BIT_APPS := true
+
+AUDIOSERVER_MULTILIB := 64
