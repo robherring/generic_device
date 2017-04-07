@@ -5,6 +5,8 @@ PRODUCT_PACKAGES := \
 		hostapd \
 		wpa_supplicant \
 		wificond \
+		android.hardware.wifi@1.0-service \
+
 
 PRODUCT_COPY_FILES := \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
