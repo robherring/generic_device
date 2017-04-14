@@ -22,23 +22,29 @@
 
 # Note: all variables must be local or they get sourced.
 
-target_config() {
+target() {
 	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
 
 	pushd ${device_dir} > /dev/null
 
-	make menuconfig all
-
-	popd > /dev/null
-}
-
-target_save_config() {
-	local device_dir="$(dirname "${BASH_SOURCE[0]}")"
-
-	pushd ${device_dir} > /dev/null
-
-	make savedefconfig
-	cp ${TARGET_PRODUCT}/defconfig configs/${TARGET_PRODUCT}_defconfig
+	case "$1" in
+	menuconfig)
+		command make menuconfig all
+		;;
+	reset)
+		command make ${TARGET_PRODUCT}_defconfig all
+		;;
+	save)
+		command make savedefconfig
+		cp ${TARGET_PRODUCT}/defconfig configs/${TARGET_PRODUCT}_defconfig
+		;;
+	*)
+		printf "Missing/invalid command:\n\n"
+		printf "menuconfig - Configure the target running menuconfig\n"
+		printf "reset - Reset the target to the defconfig\n"
+		printf "save - Save the current configuration to the defconfig\n"
+		;;
+	esac
 
 	popd > /dev/null
 }
