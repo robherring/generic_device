@@ -52,6 +52,10 @@ create_devices() {
 		local defconfig=$(basename "${f}")
 		local config_name=$(basename "${f}" _defconfig)
 
+		# Use the existing .config if it exists
+		if [ -f "${config_name}/.config" ]; then
+			defconfig="olddefconfig"
+		fi
 		command make O=${config_name} ${defconfig} all > /dev/null 2> /dev/null
 
 		local prod_dev=$(sed -n -e 's/CONFIG_PRODUCT_DEVICE=\(.*\)/\1/p' ${config_name}/config.mk)
