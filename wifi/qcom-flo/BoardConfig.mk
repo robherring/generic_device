@@ -1,0 +1,2 @@
+BOARD_SEPOLICY_DIRS += $(if $(CONFIG_QCOM_FLO_WIFI), \
+	$(LOCAL_PATH)/sepolicy)

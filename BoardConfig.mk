@@ -45,4 +45,4 @@ define include-board-configs
  )
 endef
 
-$(call include-board-configs, wifi/qcom graphics/drm)
+$(call include-board-configs, wifi/qcom-flo graphics/drm)

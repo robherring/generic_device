@@ -18,6 +18,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 
 subdirs-true :=
-subdirs-$(CONFIG_QCOM_WIFI) += qcom
+subdirs-$(CONFIG_QCOM_FLO_WIFI) += qcom-flo
 subdirs-$(CONFIG_TI_WILINK_WIFI) += ti_wilink
 $(call inherit-product-dirs, $(subdirs-true))
