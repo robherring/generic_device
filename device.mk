@@ -56,11 +56,6 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			$(LOCAL_PATH)/ueventd.rc:root/ueventd.unknown.rc \
 			$(LOCAL_PATH)/fstab:root/fstab.unknown)
 
-PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
-	$(LOCAL_PATH)/a300_pfp.fw:root/lib/firmware/a300_pfp.fw \
-	$(LOCAL_PATH)/a300_pm4.fw:root/lib/firmware/a300_pm4.fw \
-)
-
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
