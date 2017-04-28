@@ -143,6 +143,12 @@ config DALVIK_VM_HEAPGROWTHLIMIT
 	help
 	  Typically this is less than half the heap size.
 
+config LOWMEM_CONFIG
+	bool "Enable Lowmem Configuration"
+	help
+	  Enables some of the reccomended low-memory options for devices
+	  with 1GB or less RAM.
+
 endmenu
 
 menu "Image Configuration"

@@ -76,6 +76,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapmaxfree=$(CONFIG_DALVIK_VM_HEAPMAXFREE)m
 
 subdirs-true := lights graphics
+subdirs-$(CONFIG_LOWMEM_CONFIG) += lowmem
 subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
 subdirs-$(CONFIG_SENSOR) += sensor
