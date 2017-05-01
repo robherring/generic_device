@@ -7,7 +7,7 @@
 #
 
 usage() {
-	printf "Usage: $0 [-d <image directory>] [<partition list>]\n"
+	printf "Usage: $0 [-d <image directory>] [-b <block device>] <partition list>]\n"
 	exit 1
 }
 
@@ -15,11 +15,12 @@ blkdev=/dev/mmcblk0
 image_path='.'
 partitions="system cache userdata"
 
-while getopts "srd:" opt
+while getopts "srd:b:" opt
 do
 	case "$opt" in
 	r)	resize_only=1;;
 	d)	image_path=$OPTARG;;
+	b)      blkdev=$OPTARG;;
 	[?])	usage;;
 	esac
 done
