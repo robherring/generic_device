@@ -32,4 +32,11 @@ config BOARD_GPU_DRIVERS
 	default "freedreno virgl"
 
 endif
+config DISPLAY_DPI
+	int "Display DPI setting override"
+	default 0
+	help
+	  Sets the DPI value. If left as zero, the DPI will
+	  be probed via EDID from the monitor or use values
+	  from DT.
 endmenu

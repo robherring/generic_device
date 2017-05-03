@@ -8,3 +8,4 @@ CONFIG_KERNEL_PATH="device/linaro/generic-kernels/android-db410c-qcomlt-4.9.gz-d
 CONFIG_BOARD_KERNEL_CMDLINE="androidboot.selinux=permissive firmware_class.path=/system/vendor/firmware/"
 CONFIG_BOARD_KERNEL_BASE=0x80008000
 CONFIG_RAMDISK_OFFSET=0x0
+CONFIG_DISPLAY_DPI=160
