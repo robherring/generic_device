@@ -66,7 +66,7 @@ static int read_int(char const *path)
 {
 	char buffer[20];
 	int amt;
-	int fd = open(path, O_RDWR);
+	int fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return -errno;
 
