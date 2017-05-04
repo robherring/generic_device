@@ -95,7 +95,7 @@ static int normalize_brightness(int brightness, int max_brightness)
 	 * to the max_brightness range given
 	 */
 	ret = brightness * max_brightness;
-	ret = ret / 256;
+	ret = ret / 255;
 
 	return ret;
 }
