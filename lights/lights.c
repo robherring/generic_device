@@ -66,7 +66,7 @@ static int read_int(char const *path)
 {
 	char buffer[20];
 	int amt;
-	int fd = open(path, O_RDWR);
+	int fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return -errno;
 
@@ -95,7 +95,7 @@ static int normalize_brightness(int brightness, int max_brightness)
 	 * to the max_brightness range given
 	 */
 	ret = brightness * max_brightness;
-	ret = ret / 256;
+	ret = ret / 255;
 
 	return ret;
 }
@@ -159,9 +159,15 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 	} while (entry = readdir(dir));
 	closedir(dir);
 
+	ALOGI("backlight path: %s\n", backlight_path);
+
 	snprintf(buffer, 1024, "%s/max_brightness", backlight_path);
 	brightness_max = read_int(buffer);
-	ALOGE("JDB: brightness_max: %ld\n", brightness_max);
+
+	if (brightness_max <= 0)
+		ALOGE("invalid max brightness: %ld\n", brightness_max);
+	else
+		ALOGI("max brightness set: %ld\n", brightness_max);
 
 	dev->common.tag = HARDWARE_DEVICE_TAG;
 	dev->common.version = 0;
