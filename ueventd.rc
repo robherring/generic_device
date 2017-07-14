@@ -14,7 +14,6 @@
 /sys/bus/iio/devices/iio:device* scan_elements/in_anglvel_z_en 0660 system system
 /sys/bus/iio/devices/trigger* 	 name 0660 system system
 /sys/class/backlight*		 brightness 0664 system system
-/sys/class/backlight*		 max_brightness 0664 system system
 
 /dev/sw_sync              0660   root       graphics
 /dev/iio:device0          0660   system     system
