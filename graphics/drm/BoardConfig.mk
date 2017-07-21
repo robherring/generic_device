@@ -1,2 +1,2 @@
 BOARD_SEPOLICY_DIRS += \
-	$(LOCAL_PATH)/sepolicy
+	$(DEV_DIR)/graphics/drm/sepolicy

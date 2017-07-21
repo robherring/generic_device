@@ -37,11 +37,5 @@ BOARD_SEPOLICY_DIRS += \
 	build/target/board/generic/sepolicy \
 	$(DEV_DIR)/sepolicy
 
-define include-board-configs
- $(foreach dir, $(1), \
-  $(eval LOCAL_PATH := $(DEV_DIR)/$(dir)) \
-  $(eval sinclude $(LOCAL_PATH)/BoardConfig.mk) \
- )
-endef
-
-$(call include-board-configs, wifi/qcom-flo graphics/drm)
+-include $(DEV_DIR)/wifi/qcom-flo/BoardConfig.mk
+-include $(DEV_DIR)/graphics/drm/BoardConfig.mk
