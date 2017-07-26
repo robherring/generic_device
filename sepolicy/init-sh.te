@@ -1,4 +1,4 @@
-type init-sh, domain, domain_deprecated;
+type init-sh, domain;
 type init-sh_exec, exec_type, file_type;
 
 # Started by init
