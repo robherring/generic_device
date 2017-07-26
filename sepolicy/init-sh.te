@@ -4,7 +4,7 @@ type init-sh_exec, exec_type, file_type;
 # Started by init
 init_daemon_domain(init-sh)
 
-allow init-sh shell_exec:file r_file_perms;
+allow init-sh shell_exec:file rx_file_perms;
 allow init-sh init-sh_exec:file rx_file_perms;
 
 
