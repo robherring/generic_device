@@ -37,5 +37,6 @@ BOARD_SEPOLICY_DIRS += \
 	build/target/board/generic/sepolicy \
 	$(DEV_DIR)/sepolicy
 
+-include $(DEV_DIR)/bluetooth/BoardConfig.mk
 -include $(DEV_DIR)/wifi/qcom-flo/BoardConfig.mk
 -include $(DEV_DIR)/graphics/drm/BoardConfig.mk

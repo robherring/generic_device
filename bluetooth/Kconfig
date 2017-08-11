@@ -1,0 +1,6 @@
+config BLUETOOTH
+	bool "Bluetooth support"
+	help
+	  Select to enable Bluetooth support using standard Linux kernel BT
+	  drivers.
+

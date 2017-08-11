@@ -77,6 +77,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 subdirs-true := lights graphics
 subdirs-$(CONFIG_LOWMEM_CONFIG) += lowmem
+subdirs-$(CONFIG_BLUETOOTH) += bluetooth
 subdirs-$(CONFIG_WIFI) += wifi
 subdirs-$(CONFIG_ETHERNET) += ethernet
 subdirs-$(CONFIG_SENSOR) += sensor
