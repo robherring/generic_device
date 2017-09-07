@@ -75,6 +75,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=$(CONFIG_DALVIK_VM_HEAPMAXFREE)m
 
+PRODUCT_PACKAGES += \
+	android.hardware.audio@2.0-impl \
+	android.hardware.audio@2.0-service \
+	android.hardware.audio.effect@2.0-impl \
+	android.hardware.keymaster@3.0-impl \
+	android.hardware.keymaster@3.0-service
+
 subdirs-true := lights graphics
 subdirs-$(CONFIG_LOWMEM_CONFIG) += lowmem
 subdirs-$(CONFIG_BLUETOOTH) += bluetooth
