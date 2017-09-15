@@ -1,6 +1,5 @@
 #wifi items
 PRODUCT_PACKAGES := \
-		wifi.rc \
 		libwpa_client \
 		hostapd \
 		wpa_supplicant \
@@ -11,6 +10,7 @@ PRODUCT_PACKAGES := \
 PRODUCT_COPY_FILES := \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	device/linaro/hikey/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	$(LOCAL_PATH)/wifi.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/wifi.rc
 
 PRODUCT_PROPERTY_OVERRIDES := \
 		wifi.interface=wlan0 \
