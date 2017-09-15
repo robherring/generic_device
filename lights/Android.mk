@@ -27,6 +27,8 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_SHARED_LIBRARIES := liblog
 
+LOCAL_PROPRIETARY_MODULE := true
+
 LOCAL_MODULE := lights.default
 
 include $(BUILD_SHARED_LIBRARY)
