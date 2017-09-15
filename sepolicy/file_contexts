@@ -1,1 +1,1 @@
-/system/bin/init\.sh    u:object_r:init-sh_exec:s0
+/vendor/bin/init\.sh    u:object_r:init-sh_exec:s0

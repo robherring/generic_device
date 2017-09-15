@@ -65,7 +65,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc \
-    $(LOCAL_PATH)/init.sh:system/bin/init.sh \
+    $(LOCAL_PATH)/init.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.sh \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapstartsize=$(CONFIG_DALVIK_VM_HEAPSTARTSIZE)m \

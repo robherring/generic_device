@@ -1,12 +1,12 @@
 type init-sh, domain;
-type init-sh_exec, exec_type, file_type;
+type init-sh_exec, exec_type, vendor_file_type, file_type;
 
 # Started by init
 init_daemon_domain(init-sh)
 
-allow init-sh shell_exec:file rx_file_perms;
+allow init-sh vendor_shell_exec:file rx_file_perms;
 allow init-sh init-sh_exec:file rx_file_perms;
 
 
 # execute toybox/toolbox
-allow init-sh toolbox_exec:file rx_file_perms;
+allow init-sh vendor_toolbox_exec:file rx_file_perms;
