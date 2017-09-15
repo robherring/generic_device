@@ -64,7 +64,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gadgets.rc:system/etc/init/gadgets.rc \
+    $(LOCAL_PATH)/gadgets.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/gadgets.rc \
     $(LOCAL_PATH)/init.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.sh \
 
 PRODUCT_PROPERTY_OVERRIDES += \
