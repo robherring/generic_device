@@ -36,6 +36,8 @@ else
 endif
 endif
 
+$(call inherit-product-if-true, $(CONFIG_TREBLE), $(SRC_TARGET_DIR)/product/treble_common.mk)
+
 $(call inherit-product-if-true, $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
 $(call inherit-product-if-true, $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
 
@@ -76,6 +78,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapmaxfree=$(CONFIG_DALVIK_VM_HEAPMAXFREE)m
 
 PRODUCT_PACKAGES += \
+	linaro-vndk \
 	android.hardware.drm@1.0-service \
 	android.hardware.drm@1.0-impl \
 	android.hardware.audio@2.0-impl \

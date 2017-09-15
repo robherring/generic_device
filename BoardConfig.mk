@@ -38,6 +38,7 @@ BOARD_SEPOLICY_DIRS += \
 	$(DEV_DIR)/sepolicy
 
 DEVICE_MANIFEST_FILE += $(DEV_DIR)/manifest.xml
+DEVICE_MATRIX_FILE := $(DEV_DIR)/compatibility_matrix.xml
 
 -include $(DEV_DIR)/bluetooth/BoardConfig.mk
 -include $(DEV_DIR)/wifi/BoardConfig.mk

@@ -112,6 +112,13 @@ config TV
 endchoice
 endmenu
 
+config TREBLE
+	bool "Enable Treble-ized build"
+	help
+	  When enabled, this enforces the vendor/system split. Typically a separate
+	  vendor image should also be enabled with this, but that isn't strictly
+	  required.
+
 menu "Dalvik/ART Heap Configuration"
 # Default values are targeted towards 1G RAM
 
