@@ -1,5 +1,4 @@
 PRODUCT_PACKAGES := \
-		drm.rc \
 		libGLES_mesa \
 		hwcomposer.drm \
 		gralloc.gbm \
@@ -8,3 +7,6 @@ PRODUCT_PACKAGES := \
 		android.hardware.graphics.mapper@2.0-impl \
 		android.hardware.graphics.allocator@2.0-service \
 		android.hardware.graphics.allocator@2.0-impl
+
+PRODUCT_COPY_FILES := \
+	$(LOCAL_PATH)/drm.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/drm.rc
