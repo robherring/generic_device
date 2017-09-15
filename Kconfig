@@ -178,6 +178,43 @@ config BOARD_SYSTEMIMAGE_PARTITION_SIZE
 	help
 	  BOARD_SYSTEMIMAGE_PARTITION_SIZE
 
+config SEPARATE_VENDOR_IMAGE
+	bool "Build separate vendor image file"
+
+config TARGET_COPY_OUT_VENDOR
+	string
+	default "vendor"
+	depends on SEPARATE_VENDOR_IMAGE
+
+if SEPARATE_VENDOR_IMAGE
+
+config BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+	string
+	default "ext4" if VENDORIMAGE_FS_EXT4
+	default "squashfs" if VENDORIMAGE_FS_SQUASHFS
+
+choice
+	prompt "Vendor Image Filesystem Type"
+	default VENDORIMAGE_FS_EXT4
+	help
+	  BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE
+
+config VENDORIMAGE_FS_EXT4
+	bool "ext4"
+
+config VENDORIMAGE_FS_SQUASHFS
+	bool "squashfs"
+
+endchoice
+
+config BOARD_VENDORIMAGE_PARTITION_SIZE
+	int "Vendor Image Size"
+	default 200000000
+	help
+	  BOARD_VENDORIMAGE_PARTITION_SIZE
+
+endif
+
 config BOARD_USERDATAIMAGE_PARTITION_SIZE
 	int "Userdata Image Size"
 	default 576716800
