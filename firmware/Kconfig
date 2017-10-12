@@ -1,0 +1,14 @@
+config FIRMWARE
+	bool "Include linux-firmware files"
+
+config FIRMWARE_ALL
+	bool "Include all linux-firmware files"
+	depends on FIRMWARE
+
+config FIRMWARE_FILES
+	string "Firmware files"
+	depends on !FIRMWARE_ALL
+	depends on FIRMWARE
+	help
+	  A comma separated list of firmware files to copy. Paths shall be
+	  relative to the base of linux-firmware repository.

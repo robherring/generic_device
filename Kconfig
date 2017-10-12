@@ -270,6 +270,7 @@ config TARGET_NO_KERNEL
 
 menu "Device Support"
 
+source "firmware/Kconfig"
 source "graphics/Kconfig"
 source "bluetooth/Kconfig"
 source "wifi/Kconfig"

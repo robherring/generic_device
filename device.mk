@@ -50,8 +50,6 @@ PRODUCT_COPY_FILES += \
 	$(call add-to-product-copy-files-if-true, $(CONFIG_KERNEL), \
 		$(CONFIG_KERNEL_PATH):kernel)
 
-$(foreach dev,$(wildcard vendor/*/*/device-partial.mk), $(call inherit-product, $(dev)))
-
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 			system/core/rootdir/init.rc:root/init.rc \
 			$(LOCAL_PATH)/init.rc:root/init.unknown.rc \
@@ -89,6 +87,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.soundtrigger@2.0-impl
 
 subdirs-true := lights graphics
+subdirs-$(CONFIG_FIRMWARE) += firmware
 subdirs-$(CONFIG_LOWMEM_CONFIG) += lowmem
 subdirs-$(CONFIG_BLUETOOTH) += bluetooth
 subdirs-$(CONFIG_WIFI) += wifi
