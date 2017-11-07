@@ -181,7 +181,7 @@ endchoice
 
 config BOARD_SYSTEMIMAGE_PARTITION_SIZE
 	int "System Image Size"
-	default 1000000000
+	default 1200000000
 	help
 	  BOARD_SYSTEMIMAGE_PARTITION_SIZE
 
