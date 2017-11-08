@@ -5,11 +5,6 @@ config SW_GRAPHICS
 
 if !SW_GRAPHICS
 
-config HWCOMPOSER
-	bool
-	default y if BOARD_USES_DRM_HWCOMPOSER
-	default y if GRALLOC_MALI
-
 choice
 	prompt "HWComposer support"
 	default BOARD_USES_DRM_HWCOMPOSER
@@ -23,7 +18,7 @@ config GRALLOC_MALI
 endchoice
 
 config TARGET_USES_HWC2
-	bool "HWComposer 2 support"
+	def_bool y
 	depends on BOARD_USES_DRM_HWCOMPOSER
 
 config BOARD_GPU_DRIVERS
