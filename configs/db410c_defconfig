@@ -4,7 +4,7 @@ CONFIG_LOWMEM_CONFIG=y
 CONFIG_BOARD_SYSTEMIMAGE_PARTITION_SIZE=1288491008
 CONFIG_BOARD_USERDATAIMAGE_PARTITION_SIZE=5653544960
 CONFIG_KERNEL=y
-CONFIG_KERNEL_PATH="device/linaro/generic-kernels/android-db410c-qcomlt-4.9.gz-dtb"
+CONFIG_KERNEL_PATH="device/linaro/generic-kernels/db410c-qcomlt-4.14.gz-dtb"
 CONFIG_BOARD_KERNEL_CMDLINE="androidboot.selinux=permissive firmware_class.path=/system/vendor/firmware/"
 CONFIG_BOARD_KERNEL_BASE=0x80008000
 CONFIG_RAMDISK_OFFSET=0x0
