@@ -32,7 +32,7 @@ VNDK_SP_LIBRARIES := \
 VNDK_SP_EXT_LIBRARIES := ##_VNDK_SP_EXT_##
 
 EXTRA_VENDOR_LIBRARIES := \
-	libLLVM \
+	libLLVM_android \
 	libexpat
 
 #-------------------------------------------------------------------------------
