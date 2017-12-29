@@ -1,6 +1,6 @@
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 			-iwlan0 -c/data/misc/wifi/wpa_supplicant.conf \
-			-e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
+			-Dnl80211 -g@android:wpa_wlan0
 	socket wpa_wlan0 dgram 660 wifi wifi
 	class main
 	disabled

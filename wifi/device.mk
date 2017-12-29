@@ -5,6 +5,8 @@ PRODUCT_PACKAGES := \
 		wpa_supplicant \
 		wificond \
 		android.hardware.wifi@1.0-service \
+		android.hardware.wifi.supplicant@1.0 \
+		wifilogd
 
 
 PRODUCT_COPY_FILES := \
