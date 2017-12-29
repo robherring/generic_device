@@ -1,6 +1,4 @@
 
-$(foreach dev,$(wildcard vendor/*/*/device-partial.mk), $(call inherit-product, $(dev)))
-
 comma := ,
 
 ifeq ($(CONFIG_FIRMWARE_ALL),true)

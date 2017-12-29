@@ -41,6 +41,8 @@ $(call inherit-product-if-true, $(CONFIG_TREBLE), $(SRC_TARGET_DIR)/product/treb
 $(call inherit-product-if-true, $(CONFIG_TV), $(LOCAL_PATH)/device_tv.mk)
 $(call inherit-product-if-true, $(CONFIG_TABLET), $(LOCAL_PATH)/device_tablet.mk)
 
+$(foreach dev,$(wildcard vendor/*/*/device-partial.mk), $(call inherit-product, $(dev)))
+
 PRODUCT_NAME := $(TARGET_PRODUCT)
 PRODUCT_BRAND := Android
 
