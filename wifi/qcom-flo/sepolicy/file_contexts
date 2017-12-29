@@ -1,2 +1,0 @@
-/vendor/bin/conn_init              u:object_r:conn_init_exec:s0
-/vendor/bin/start_qcom_wifi\.sh    u:object_r:conn_init_exec:s0

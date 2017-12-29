@@ -4,9 +4,6 @@ menuconfig WIFI
 
 if WIFI
 
-config QCOM_FLO_WIFI
-	bool "Qualcomm WCNSS wifi support for Nexus7 devices"
-
 config TI_WILINK_WIFI
 	bool "TI WILINK wifi support"
 

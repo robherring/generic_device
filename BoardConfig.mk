@@ -42,5 +42,4 @@ DEVICE_MATRIX_FILE := $(DEV_DIR)/compatibility_matrix.xml
 
 -include $(DEV_DIR)/bluetooth/BoardConfig.mk
 -include $(DEV_DIR)/wifi/BoardConfig.mk
--include $(DEV_DIR)/wifi/qcom-flo/BoardConfig.mk
 -include $(DEV_DIR)/graphics/drm/BoardConfig.mk
