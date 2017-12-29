@@ -4,6 +4,16 @@ menuconfig WIFI
 
 if WIFI
 
+config BOARD_WLAN_DEVICE
+	string "Pick a vendor provided WiFi HAL implementation library."
+	default ""
+	help
+	  Defaults to the fallback "vendor" hal library (libwifi-hal-fallback).
+	  Other options include:
+	    bcmdhd: Broadcom FullMAC wireless cards (libwifi-hal-bcm) support
+	    qcwcn: Qualcomm generic WCN wifi hal (libwifi-hal-qcom) support
+	    MediaTek: MTK wifi hal (libwifi-hal-mt66xx) support
+
 config TI_WILINK_WIFI
 	bool "TI WILINK wifi support"
 
