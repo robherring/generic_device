@@ -233,9 +233,6 @@ config TARGET_USERIMAGES_SPARSE_EXT_DISABLED
 	help
 	  TARGET_USERIMAGES_SPARSE_EXT_DISABLED
 
-config DEX_PREOPT
-	bool "Enable .dex Pre-Optimations at build time"
-
 endmenu
 
 menuconfig KERNEL
